@@ -1,0 +1,14 @@
+syntax = "proto3";
+package ASAP;
+//import "proto/memory_message.proto";
+option go_package = "/home/sayna/Desktop/carriot/GRPC&Protobuf/GRPC&Protobuf";
+message LoginRequest{
+  string username =1;
+  string password =2;
+}
+message LoginResponse{
+string access_token=1;
+}
+service AuthService{
+  rpc Login(LoginRequest) returns (LoginResponse){};
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+package ASAP;
+import "proto/farm_message.proto";
+option go_package = "/home/sayna/Desktop/carriot/GRPC&Protobuf/GRPC&Protobuf";
+message CreateConnectionRequest{
+  Connection messageRequest =1;
+}
+message CreateConnectionResponse{
+  Connection messageResponse =1;
+}
+service ConnectionService{
+  rpc Connect(CreateConnectionRequest) returns (CreateConnectionResponse){};
+}
