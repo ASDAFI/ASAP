@@ -1,3 +1,4 @@
 mkdir backup
-make backup-cronjob
-make up
+mkdir backup
+bash backup.sh
+docker-compose -f postgres-docker-compose.yaml up
