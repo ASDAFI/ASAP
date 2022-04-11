@@ -10,7 +10,6 @@ backup:
 	bash backup.sh
 
 backup-cronjob:
-	rm -rf backup.sh
 	bash setup_cronjob.sh
 
 
