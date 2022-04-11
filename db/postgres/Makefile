@@ -6,7 +6,7 @@ down:
 	docker-compose -f postgres-docker-compose.yaml down
 
 backup:
-	touch backup
+	mkdir backup
 	bash backup.sh
 
 backup-cronjob:
