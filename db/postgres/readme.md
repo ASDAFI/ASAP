@@ -7,7 +7,7 @@ bash setup.sh
 ```
 
 ## Down
-delete and stop database containers
+delete and stop database containers.
 ```
 make down
 ```
