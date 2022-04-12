@@ -1,0 +1,24 @@
+server:
+  host: 0.0.0.0
+  grpcport: 7777
+  httpport: 8000
+
+database:
+  host: localhost
+  port: 5432
+  user: asap
+  password: asapDB!
+  db: farmdb
+  connMaxLifetime: 0
+  maxIdleConns: 20
+  maxOpenConns: 20
+
+
+pgadmin4:
+  port: 5050
+  username: asap@carriot.ir
+  password: asapDB!)
+
+credential:
+  tokensecret: secret
+
