@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package service.farm;
+import "google/api/annotations.proto";
+import "messages/user.proto";
+import "messages/devices.proto";
+
+option go_package = "farm/src/proto/service/farm";
+
+service Farm {
+  rpc Login (messages.user.LoginRequest) returns (messages.user.LoginResponse) {
+    option (google.api.http) = {
+      post: "/login"
+      body: "*"
+    };
+  }
+
+  rpc CreateDevice (messages.devices.CreateDeviceRequest) returns (messages.devices.CreateDeviceResponse) {
+    option (google.api.http) = {
+      post: "/devices/create"
+      body: "*"
+    };
+  }
+
+}
