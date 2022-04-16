@@ -25,7 +25,7 @@ GOCMD=go
 GOMOD=GO111MODULE=on $(GOCMD) mod
 GOGET=GO111MODULE=on $(GOCMD) "get"
 BUILD_PROTO_DIRECTORY=../
-GOPATH=/home/$USER/go/pkg/mod
+GOPATH=/home/$(USER)/go/pkg/mod
 GOOGLE_APIS_DIR="$$(find $(GOPATH) -wholename "*github.com/grpc-ecosystem/grpc-gateway*/third_party/googleapis" 2>/dev/null | head -n 1)"
 PROTOC_IMPORT_PATH=-I${GOOGLE_APIS_DIR} -I $$PWD/proto -I/usr/local/include
 GOBUILD=$(GOCMD) build
