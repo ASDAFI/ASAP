@@ -1,19 +1,19 @@
 # POSTGRESQL
 
 ## Setup
-setup postgres containers and backup.
+setup postgres container and backup.
 ```
 bash setup.sh
 ```
 
 ## Down
-delete and stop database containers.
+delete and stop postgres container.
 ```
 make down
 ```
 
 ## Up
-pull and run database containers.
+pull and run postgres container.
 ```
 make up
 ```

@@ -17,16 +17,5 @@ services:
         restart: always
        
 
-    pgadmin4:
-        container_name: pgadmin4
-        image: dpage/pgadmin4
-        environment:
-            PGADMIN_DEFAULT_EMAIL: asap@carriot.ir
-            PGADMIN_DEFAULT_PASSWORD: asapDB!)
-        depends_on: 
-            - postgres
-        ports:
-            - 5050:80
-        restart: always 
         
     

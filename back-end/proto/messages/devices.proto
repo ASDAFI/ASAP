@@ -1,0 +1,15 @@
+syntax = "proto3";
+package messages.devices;
+
+option go_package = "farm/src/proto/messages/devices" ;
+
+
+
+message CreateDeviceRequest {
+    string device_serial = 1;
+    string phone_number =2 ;
+}
+
+message CreateDeviceResponse {
+  uint32 device_id = 1 ;
+}
