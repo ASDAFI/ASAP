@@ -1,0 +1,17 @@
+syntax = "proto3";
+package services.log;
+import "google/api/annotations.proto";
+import "messages/water_log.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "services/log";
+
+service Log {
+  rpc CreateWaterLog (messages.waterLog.CreateWaterLogRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/waterLog"
+      body: "*"
+    };
+  }
+
+}

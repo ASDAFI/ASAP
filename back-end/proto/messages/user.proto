@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package messages.user;
 
-option go_package = "farm/src/proto/messages/user";
+option go_package = "messages/user";
 
 message LoginRequest {
   string username = 1;

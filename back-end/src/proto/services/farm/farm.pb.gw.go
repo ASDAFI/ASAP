@@ -10,9 +10,9 @@ package farm
 
 import (
 	"context"
-	"farm/src/proto/messages/devices"
-	"farm/src/proto/messages/user"
 	"io"
+	"messages/devices"
+	"messages/user"
 	"net/http"
 
 	"github.com/golang/protobuf/descriptor"

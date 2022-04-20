@@ -5,7 +5,7 @@ import "google/api/annotations.proto";
 import "messages/user.proto";
 import "messages/devices.proto";
 
-option go_package = "farm/src/proto/service/farm";
+option go_package = "services/farm";
 
 service Farm {
   rpc Login (messages.user.LoginRequest) returns (messages.user.LoginResponse) {

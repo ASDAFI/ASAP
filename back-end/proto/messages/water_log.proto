@@ -1,0 +1,15 @@
+syntax = "proto3";
+package messages.waterLog;
+import "google/protobuf/timestamp.proto";
+option go_package = "messages/water_log" ;
+
+message CreateWaterLogRequest {
+  uint32 device_id = 1;
+  uint32 user_id =2 ;
+  float volume=3;
+  google.protobuf.Timestamp entry_time=4;
+}
+
+message CreateWaterLogResponse {
+  uint32 message = 1 ;
+}
