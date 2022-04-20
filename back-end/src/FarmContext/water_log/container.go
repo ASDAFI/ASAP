@@ -22,7 +22,7 @@ type WaterLog struct {
 
 }
 
-func (Farm) TableName() string {
+func (WaterLog) TableName() string {
 	return "water_log"
 }
 
