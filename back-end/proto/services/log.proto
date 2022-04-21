@@ -13,5 +13,11 @@ service Log {
       body: "*"
     };
   }
+  rpc UpdateWaterLog (messages.waterLog.UpdateWaterLogRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/waterLog/update"
+      body: "*"
+    };
+  }
 
 }

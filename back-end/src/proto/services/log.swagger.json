@@ -42,6 +42,38 @@
           "Log"
         ]
       }
+    },
+    "/waterLog/update": {
+      "post": {
+        "operationId": "Log_UpdateWaterLog",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/waterLogUpdateWaterLogRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Log"
+        ]
+      }
     }
   },
   "definitions": {
@@ -81,6 +113,31 @@
     "waterLogCreateWaterLogRequest": {
       "type": "object",
       "properties": {
+        "device_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "volume": {
+          "type": "number",
+          "format": "float"
+        },
+        "entry_time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "waterLogUpdateWaterLogRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
         "device_id": {
           "type": "integer",
           "format": "int64"

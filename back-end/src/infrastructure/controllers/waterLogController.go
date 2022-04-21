@@ -20,5 +20,16 @@ func (w *WaterLogServer) CreateWaterLog(ctx context.Context, request *water_log.
 		Time:     request.GetEntryTime().AsTime(),
 	})
 	return nil, err
-
+}
+func (w *WaterLogServer) UpdateWaterLog(ctx context.Context, request *water_log.UpdateWaterLogRequest) (*water_log.UpdateWaterLogResponse, error) {
+	userId := ctx.Value("userId").(uint)
+	commandHandler:= devices.NewDeviceCommandHandler(devices.NewWaterLogRepository(infrastructure.PostgresDBProvider.DB),devices.NewDeviceRepository(infrastructure.PostgresDBProvider.DB))
+	err := commandHandler.UpdateWaterHandler(ctx , devices.UpdateWaterCommand{
+		Id: uint(request.GetId()),
+		DeviceId: uint(request.GetDeviceId()),
+		UserId:   userId,
+		Volume:   request.GetVolume(),
+		Time:     request.GetEntryTime().AsTime(),
+	})
+	return nil, err
 }
