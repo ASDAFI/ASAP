@@ -60,3 +60,23 @@ func (h *AuthHandler) Login(ctx context.Context, username string, password strin
 	}
 	return nil, tokenString
 }
+func (h *AuthHandler) Logout(ctx context.Context, username string) error {
+	user , err := h.userRepo.FindByUserName(ctx,username)
+	if err != nil {
+		return err
+	}
+	token := &AuthToken{}
+	token ,err = h.userRepo.FindTokenByUserName(ctx,user.Username)
+	if err != nil {
+		return err
+	}
+	err = infrastructure.PostgresDBProvider.DB.WithContext(ctx).Delete(token).Error
+	if err != nil {
+		return err
+	}
+
+	/*expiresAt := time.Now().Unix()
+	token.ExpiresAt=expiresAt
+	createToken := infrastructure.PostgresDBProvider.DB.Updates(token)*/
+	return nil
+}

@@ -4,7 +4,7 @@ import (
 	"farm/configs"
 	"farm/src/infrastructure/controllers"
 	"farm/src/middlewares"
-	"farm/src/proto/service/farm"
+	"farm/src/proto/services/farm"
 	"fmt"
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"

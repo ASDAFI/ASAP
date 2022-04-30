@@ -74,6 +74,38 @@
           "Farm"
         ]
       }
+    },
+    "/logout": {
+      "post": {
+        "operationId": "Farm_Logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userLogoutRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Farm"
+        ]
+      }
     }
   },
   "definitions": {
@@ -156,6 +188,14 @@
         "id": {
           "type": "string",
           "format": "uint64"
+        }
+      }
+    },
+    "userLogoutRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
         }
       }
     }

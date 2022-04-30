@@ -19,6 +19,12 @@ func (f FarmServer) Login(ctx context.Context, request *pb_user.LoginRequest) (*
 		Token: token,
 	}, loginErr
 }
+func (f FarmServer) Logout(ctx context.Context, request *pb_user.LogoutRequest) error {
+	log.Info("Receive message to logout: ", request.Username)
+	authHandler := users.AuthHandler{}
+	logoutErr := authHandler.Logout(ctx, request.GetUsername())
+	return logoutErr
+}
 
 func (f FarmServer) CreateDevice(ctx context.Context, request *pb_device.CreateDeviceRequest) (*pb_device.CreateDeviceResponse, error) {
 	log.Info("Receive message to create device")

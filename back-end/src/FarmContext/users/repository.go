@@ -8,6 +8,7 @@ import (
 type IRepository interface {
 	Save(ctx context.Context, user *User) error
 	FindByUserName(ctx context.Context, username string) (*User, error)
+	FindTokenByUserName(ctx context.Context, username string) (*AuthToken, error)
 }
 
 type UserRepository struct {
@@ -26,4 +27,9 @@ func (u *UserRepository) FindByUserName(ctx context.Context, username string) (*
 	user := &User{}
 	err := u.dBInfrastructure.DB.WithContext(ctx).Where("username = ?", username).Find(user).Error
 	return user, err
+}
+func (u *UserRepository) FindTokenByUserName(ctx context.Context, username string) (*AuthToken, error) {
+	token := &AuthToken{}
+	err := u.dBInfrastructure.DB.WithContext(ctx).Where("username = ?", username).Find(token).Error
+	return token, err
 }

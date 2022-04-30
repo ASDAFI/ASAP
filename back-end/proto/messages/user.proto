@@ -15,3 +15,11 @@ message LoginResponse {
   string token = 3;
   uint64 id = 4;
 }
+message LogoutRequest {
+  string username = 1;
+}
+
+message LogoutResponse {
+  uint32 message = 1 ;
+
+}

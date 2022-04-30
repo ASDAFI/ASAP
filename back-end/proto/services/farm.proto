@@ -4,6 +4,7 @@ package service.farm;
 import "google/api/annotations.proto";
 import "messages/user.proto";
 import "messages/devices.proto";
+import "google/protobuf/empty.proto";
 
 option go_package = "services/farm";
 
@@ -11,6 +12,12 @@ service Farm {
   rpc Login (messages.user.LoginRequest) returns (messages.user.LoginResponse) {
     option (google.api.http) = {
       post: "/login"
+      body: "*"
+    };
+  }
+rpc Logout (messages.user.LogoutRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/logout"
       body: "*"
     };
   }
