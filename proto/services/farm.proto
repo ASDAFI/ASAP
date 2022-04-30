@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package service.farm;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "messages/user.proto";
+
+option go_package = "farm/src/proto/services/farm";
+
+service FarmServer {
+  rpc Login (messages.user.LoginRequest) returns (messages.user.LoginResponse) {
+    option (google.api.http) = {
+      post: "/login"
+      body: "*"
+    };
+  }
+
+  rpc GetUser (google.protobuf.Empty) returns (messages.user.User) {
+    option (google.api.http) = {
+      get: "/user"
+    };
+  }
+
+
+}
