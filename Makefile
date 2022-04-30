@@ -4,5 +4,5 @@ postgres:
 mqtt:
 	cd ./mqtt; bash setup.sh
 
-add-device:
+device:
 	docker exec mqtt mosquitto_passwd -b /mosquitto/config/pwfile $(serial) $(password)
