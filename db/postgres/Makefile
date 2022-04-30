@@ -1,9 +1,9 @@
 
 up:
-	docker-compose -f postgres-docker-compose.yaml up -d
+	docker-compose -f docker-compose.yaml up -d
 
 down:
-	docker-compose -f postgres-docker-compose.yaml down
+	docker-compose -f docker-compose.yaml down
 
 backup:
 	mkdir backup
