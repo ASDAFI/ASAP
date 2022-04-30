@@ -1,1 +1,1 @@
-docker-compose -f mqtt-docker-compose.yaml up -d
+docker-compose -f docker-compose.yml up -d
