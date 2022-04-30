@@ -1,0 +1,6 @@
+syntax = "proto3";
+package ASAP;
+option go_package = "/home/sayna/Desktop/carriot/GRPC&Protobuf/GRPC&Protobuf";
+message Connection{
+  string request=1;
+}
