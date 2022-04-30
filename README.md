@@ -23,6 +23,11 @@ make farm
 ## Command Handler
 
 
+### Serve
+```
+./farm serve
+```
+
 ### Migrate DB
 ```
 ./farm migrate
