@@ -11,7 +11,6 @@ make docker-build
 ### Build Protobuf
 compile .proto files
 ```
-make docker-build
 make all-by-docker
 ```
 
