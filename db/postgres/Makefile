@@ -1,9 +1,9 @@
 
 up:
-	docker-compose -f docker-compose.yaml up -d
+	docker-compose -f docker-compose.yml up -d
 
 down:
-	docker-compose -f docker-compose.yaml down
+	docker-compose -f docker-compose.yml down
 
 backup:
 	mkdir backup
