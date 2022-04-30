@@ -5,6 +5,8 @@ package service.farm;
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "messages/user.proto";
+import "messages/device.proto";
+
 
 option go_package = "farm/src/proto/services/farm";
 
@@ -19,6 +21,12 @@ service FarmServer {
   rpc GetUser (google.protobuf.Empty) returns (messages.user.User) {
     option (google.api.http) = {
       get: "/user"
+    };
+  }
+  rpc CreateDevice (messages.device.CreateDeviceRequest) returns (messages.device.CreateDeviceResponse) {
+    option (google.api.http) = {
+      post: "/device/create"
+      body: "*"
     };
   }
 

@@ -58,7 +58,10 @@ var createObject = &cobra.Command{
 
 			}
 
-			userCHM.CreateUser(cmd.Context(), command)
+			_, err = userCHM.CreateUser(cmd.Context(), command)
+			if err != nil {
+				log.Panic(err)
+			}
 
 
 
