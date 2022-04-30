@@ -1,13 +1,21 @@
 # ASAP
 
-## Build Protobuf
+## Build
+
+### Setup Protobuf
+get ready to compile .proto files
+```
+make docker-build
+```
+
+### Build Protobuf
 compile .proto files
 ```
 make docker-build
 make all-by-docker
 ```
 
-## Build Farm
+### Build Farm
 compile go files
 ```
 make farm
