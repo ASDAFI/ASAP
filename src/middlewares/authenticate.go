@@ -35,9 +35,9 @@ func Authenticate(ctx context.Context) (context.Context, error) {
 		return nil, grpc.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
 	}
 
-	ctx = context.WithValue(ctx, "username", tk.Username)
+	//ctx = context.WithValue(ctx, "username", tk.Username)
 	ctx = context.WithValue(ctx, "user_id", tk.UserID)
-	ctx = context.WithValue(ctx, "company_id", tk.FarmID)
+	//ctx = context.WithValue(ctx, "company_id", tk.FarmID)
 
 	return ctx, nil
 }
