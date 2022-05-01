@@ -11,8 +11,6 @@ import (
 	"gorm.io/gorm"
 )
 
-
-
 type DBProvider struct {
 	config configs.DatabaseConfiguration
 
@@ -21,12 +19,11 @@ type DBProvider struct {
 
 var PostgresDBProvider DBProvider
 
-
 func CreateDBProvider(config configs.DatabaseConfiguration) (DBProvider, error) {
 
 	connectionString := fmt.Sprintf(
 		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", config.Host, config.Port, config.User, config.Password, config.DB)
-	fmt.Printf(connectionString)
+	fmt.Printf("host=%s port=%d user=%s dbname=%s ", config.Host, config.Port, config.User, config.DB)
 	db, err := gorm.Open(postgres.New(postgres.Config{
 		DSN:                  connectionString,
 		PreferSimpleProtocol: true, // disables implicit prepared statement usage
@@ -57,4 +54,3 @@ func CreateDBProvider(config configs.DatabaseConfiguration) (DBProvider, error) 
 	log.Info("Create Db Done.")
 	return *provider, nil
 }
-
