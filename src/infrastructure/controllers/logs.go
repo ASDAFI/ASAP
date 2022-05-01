@@ -16,7 +16,7 @@ import (
 
 func (f FarmServer) GetDeviceDataFrameBySerial(ctx context.Context, request *pb_log.GetDeviceDataFrameBySerialRequest) (*pb_log.DeviceDataFrame, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get device by serial ", userId)
+	log.Info("GetDeviceDataFrameBySerial -- userId: ", userId)
 
 	// Get Device
 	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
@@ -85,7 +85,7 @@ func (f FarmServer) GetDeviceDataFrameBySerial(ctx context.Context, request *pb_
 
 func (f FarmServer) GetDeviceDataFrameById(ctx context.Context, request *pb_log.GetDeviceDataFrameByIdRequest) (*pb_log.DeviceDataFrame, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get device by serial ", userId)
+	log.Info("GetDeviceDataFrameById  -- userId: ", userId)
 
 	// Get Device
 	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
@@ -154,7 +154,7 @@ func (f FarmServer) GetDeviceDataFrameById(ctx context.Context, request *pb_log.
 
 func (f FarmServer) GetAllDeviceDataFramesBySerial(ctx context.Context, request *pb_log.GetDeviceDataFrameBySerialRequest) (*pb_log.DeviceDataFrame, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get device by serial ", userId)
+	log.Info("GetAllDeviceDataFramesBySerial  -- userId: ", userId)
 
 	// Get Device
 	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
@@ -220,7 +220,7 @@ func (f FarmServer) GetAllDeviceDataFramesBySerial(ctx context.Context, request 
 
 func (f FarmServer) GetAllDeviceDataFramesById(ctx context.Context, request *pb_log.GetDeviceDataFrameByIdRequest) (*pb_log.DeviceDataFrame, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get device by serial ", userId)
+	log.Info("GetAllDeviceDataFramesById  -- userId: ", userId)
 
 	// Get Device
 	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
@@ -286,7 +286,7 @@ func (f FarmServer) GetAllDeviceDataFramesById(ctx context.Context, request *pb_
 
 func (f FarmServer) CreateWaterLogBySerial(ctx context.Context, request *pb_log.CreateWaterLogBySerialRequest) (*empty.Empty, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to create water log ", userId)
+	log.Info("CreateWaterLogBySerial  -- userId: ", userId)
 
 	// Get Device
 	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
@@ -322,7 +322,7 @@ func (f FarmServer) CreateWaterLogBySerial(ctx context.Context, request *pb_log.
 
 func (f FarmServer) CreateWaterLogByDeviceId(ctx context.Context, request *pb_log.CreateWaterLogByDeviceIdRequest) (*empty.Empty, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to create water log ", userId)
+	log.Info("CreateWaterLogByDeviceId -- userId: ", userId)
 
 	// Get Device
 	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
@@ -358,7 +358,7 @@ func (f FarmServer) CreateWaterLogByDeviceId(ctx context.Context, request *pb_lo
 
 func (f FarmServer) GetWaterLogs(ctx context.Context, empty *empty.Empty) (*pb_log.GetWaterLogsResponse, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get water logs ", userId)
+	log.Info("GetWaterLogs -- userId: ", userId)
 
 	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)
 	userQhandler := users.NewUserQueryHandler(userRepo)

@@ -14,7 +14,7 @@ import (
 
 func (f FarmServer) CreateDevice(ctx context.Context, request *pb_device.CreateDeviceRequest) (*pb_device.CreateDeviceResponse, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to create device ", userId)
+	log.Info("CreateDevice -- userId: ", userId)
 
 	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)
 	userQHandler := users.NewUserQueryHandler(userRepo)
@@ -57,7 +57,7 @@ func (f FarmServer) CreateDevice(ctx context.Context, request *pb_device.CreateD
 
 func (f FarmServer) GetDeviceById(ctx context.Context, request *pb_device.GetDeviceByIdRequest) (*pb_device.Device, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get device by id ", userId)
+	log.Info("GetDeviceById -- userId: ", userId)
 
 	// Get Device
 	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
@@ -93,7 +93,7 @@ func (f FarmServer) GetDeviceById(ctx context.Context, request *pb_device.GetDev
 
 func (f FarmServer) GetDeviceBySerial(ctx context.Context, request *pb_device.GetDeviceBySerialRequest) (*pb_device.Device, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get device by serial ", userId)
+	log.Info("GetDeviceBySerial -- userId: ", userId)
 
 	// Get Device
 	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
@@ -129,7 +129,7 @@ func (f FarmServer) GetDeviceBySerial(ctx context.Context, request *pb_device.Ge
 
 func (f FarmServer) GetDevices(ctx context.Context, empty *emptypb.Empty) (*pb_device.Devices, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get devices ", userId)
+	log.Info("GetDevices -- userId: ", userId)
 
 	// Get User
 	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)

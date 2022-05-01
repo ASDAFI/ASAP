@@ -7,10 +7,12 @@ import (
 	"farm/src/infrastructure"
 	pb_farm "farm/src/proto/messages/farm"
 	"github.com/golang/protobuf/ptypes/empty"
+	log "github.com/sirupsen/logrus"
 )
 
 func (f FarmServer) GetFarm(ctx context.Context, empty *empty.Empty) (*pb_farm.Farm, error) {
 	userId := ctx.Value("user_id").(uint)
+	log.Info("GetFarm -- userId: ", userId)
 
 	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)
 	userQhandler := users.NewUserQueryHandler(userRepo)

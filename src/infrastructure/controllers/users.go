@@ -11,7 +11,7 @@ import (
 )
 
 func (f FarmServer) Login(ctx context.Context, request *pb_user.LoginRequest) (*pb_user.LoginResponse, error) {
-	log.Info("Receive message to login: ", request.Username)
+	log.Info("Login -- username: ", request.Username)
 	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)
 	authHandler := users.NewAuthHandler(userRepo)
 	loginErr, token := authHandler.Login(ctx, request.GetUsername(), request.GetPassword())
@@ -22,7 +22,7 @@ func (f FarmServer) Login(ctx context.Context, request *pb_user.LoginRequest) (*
 
 func (f FarmServer) GetUser(ctx context.Context, empty *emptypb.Empty) (*pb_user.User, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to get user: ", userId)
+	log.Info("GetUser -- userId: ", userId)
 
 	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)
 	userQHandler := users.NewUserQueryHandler(userRepo)
@@ -44,7 +44,7 @@ func (f FarmServer) GetUser(ctx context.Context, empty *emptypb.Empty) (*pb_user
 
 func (f FarmServer) Logout(ctx context.Context, nothing *emptypb.Empty) (*empty.Empty, error) {
 	userId := ctx.Value("user_id").(uint)
-	log.Info("Receive message to logout: ", userId)
+	log.Info("Logout -- userId: ", userId)
 
 	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)
 	authHandler := users.NewAuthHandler(userRepo)
