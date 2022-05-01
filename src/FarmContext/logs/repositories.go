@@ -27,10 +27,10 @@ func (r *DeviceLogRepository) Save(ctx context.Context, deviceLog *DeviceLog) er
 }
 
 func (r *DeviceLogRepository) GetDataFrameByDeviceId(ctx context.Context, deviceId uint,
-	                                       startTime time.Time, endTime time.Time) ([]*DeviceLog, error) {
+	startTime time.Time, endTime time.Time) ([]*DeviceLog, error) {
 	logs := []*DeviceLog{}
 	err := r.dBInfrastructure.DB.WithContext(ctx).Where("device_id = ? AND datetime BETWEEN ? AND ? ", deviceId,
-		                                            startTime, endTime).Order("datetime desc").Find(&logs).Error
+		startTime, endTime).Order("datetime desc").Find(&logs).Error
 	return logs, err
 }
 
@@ -39,6 +39,19 @@ func (r *DeviceLogRepository) GetDataFrameBySerial(ctx context.Context, deviceSe
 	logs := []*DeviceLog{}
 	err := r.dBInfrastructure.DB.WithContext(ctx).Where("device_serial = ? AND datetime BETWEEN ? AND ? ", deviceSerial,
 		startTime, endTime).Order("datetime desc").Find(&logs).Error
+
+	return logs, err
+}
+
+func (r *DeviceLogRepository) GetAllDataFramesByDeviceId(ctx context.Context, deviceId uint) ([]*DeviceLog, error) {
+	logs := []*DeviceLog{}
+	err := r.dBInfrastructure.DB.WithContext(ctx).Where("device_id = ?", deviceId).Order("datetime desc").Find(&logs).Error
+	return logs, err
+}
+
+func (r *DeviceLogRepository) GetAllDataFramesBySerial(ctx context.Context, deviceSerial string) ([]*DeviceLog, error) {
+	logs := []*DeviceLog{}
+	err := r.dBInfrastructure.DB.WithContext(ctx).Where("device_serial = ?", deviceSerial).Order("datetime desc").Find(&logs).Error
 	return logs, err
 }
 
@@ -51,13 +64,6 @@ func (r *WaterLogRepository) FindById(ctx context.Context, waterLogId uint) (*Wa
 	err := r.dBInfrastructure.DB.WithContext(ctx).Where("id = ?", waterLogId).Find(waterLog).Error
 	return waterLog, err
 
-}
-
-
-func (r *WaterLogRepository) FindByDeviceId(ctx context.Context, deviceId uint) ([]*WaterLog, error) {
-	waterLogs := []*WaterLog{}
-	err := r.dBInfrastructure.DB.WithContext(ctx).Where("device_id = ?", deviceId).Find(&waterLogs).Error
-	return waterLogs, err
 }
 
 func (r *WaterLogRepository) FindBySerial(ctx context.Context, deviceSerial string) ([]*WaterLog, error) {

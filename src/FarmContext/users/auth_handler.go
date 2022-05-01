@@ -13,7 +13,6 @@ import (
 	"time"
 )
 
-
 type AuthHandler struct {
 	userRepo IRepository
 }
@@ -24,9 +23,9 @@ func NewAuthHandler(userRepo IRepository) *AuthHandler {
 
 // todo : separate functions
 func (h *AuthHandler) Login(ctx context.Context, username string, password string) (error, string) {
-	user , err := h.userRepo.FindByUsername(ctx,username)
+	user, err := h.userRepo.FindByUsername(ctx, username)
 	if err != nil {
-		return err , ""
+		return err, ""
 	}
 
 	expiresAt := time.Now().Add(time.Minute * 100000).Unix()
@@ -63,4 +62,24 @@ func (h *AuthHandler) Login(ctx context.Context, username string, password strin
 		log.Info(createToken.Error)
 	}
 	return nil, tokenString
+}
+
+func (h *AuthHandler) Logout(ctx context.Context, userId uint) error {
+	user, err := h.userRepo.FindById(ctx, userId)
+	if err != nil {
+		return err
+	}
+	token, err := h.userRepo.FindTokenByUsername(ctx, user.Username)
+	if err != nil {
+		return err
+	}
+	err = infrastructure.PostgresDBProvider.DB.WithContext(ctx).Delete(token).Error
+	if err != nil {
+		return err
+	}
+
+	/*expiresAt := time.Now().Unix()
+	token.ExpiresAt=expiresAt
+	createToken := infrastructure.PostgresDBProvider.DB.Updates(token)*/
+	return nil
 }

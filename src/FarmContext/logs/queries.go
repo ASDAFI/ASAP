@@ -3,21 +3,25 @@ package logs
 import "time"
 
 type GetDataFrameByDeviceIdQuery struct {
-	DeviceId uint
+	DeviceId  uint
 	StartDate time.Time
-	EndDate time.Time
-	Step int
+	EndDate   time.Time
+	Step      int
 }
 
 type GetDataFrameBySerialQuery struct {
 	DeviceSerial string
-	StartDate time.Time
-	EndDate time.Time
-	Step int
+	StartDate    time.Time
+	EndDate      time.Time
+	Step         int
 }
 
-type GetWaterLogByDeviceIdQuery struct {
+type GetAllDataFramesByDeviceIdQuery struct {
 	DeviceId uint
+}
+
+type GetAllDataFramesBySerialQuery struct {
+	DeviceSerial string
 }
 
 type GetWaterLogBySerialQuery struct {
@@ -26,4 +30,8 @@ type GetWaterLogBySerialQuery struct {
 
 type GetWaterLogByIdQuery struct {
 	Id uint
+}
+
+type GetWaterLogByFarmIdQuery struct {
+	FarmId uint
 }

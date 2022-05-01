@@ -5,6 +5,7 @@ import (
 	"farm/src/FarmContext/users"
 	"farm/src/infrastructure"
 	pb_user "farm/src/proto/messages/user"
+	"github.com/golang/protobuf/ptypes/empty"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
@@ -39,4 +40,15 @@ func (f FarmServer) GetUser(ctx context.Context, empty *emptypb.Empty) (*pb_user
 		LastName:  user.LastName,
 	}, nil
 
+}
+
+func (f FarmServer) Logout(ctx context.Context, nothing *emptypb.Empty) (*empty.Empty, error) {
+	userId := ctx.Value("user_id").(uint)
+	log.Info("Receive message to logout: ", userId)
+
+	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)
+	authHandler := users.NewAuthHandler(userRepo)
+	err := authHandler.Logout(ctx, userId)
+
+	return &empty.Empty{}, err
 }

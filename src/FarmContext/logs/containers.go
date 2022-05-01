@@ -16,7 +16,7 @@ type WaterLog struct {
 	gorm.Model
 	DeviceSerial string    `gorm:"column:device_serial"`
 	UserId       uint      `gorm:"column:user_id"`
-	Volume       float32   `gorm:"column:water_volume"`
+	Volume       uint      `gorm:"column:water_volume"`
 	EntryTime    time.Time `gorm:"column:entry_time;" sql:"index:device_time_idx"`
 }
 
@@ -30,7 +30,7 @@ type CreateDeviceLogParameters struct {
 type CreateWaterLogParameters struct {
 	DeviceSerial string
 	UserId       uint
-	Volume       float32
+	Volume       uint
 	EntryTime    time.Time
 }
 

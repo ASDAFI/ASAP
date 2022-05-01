@@ -28,3 +28,34 @@ message GetDeviceDataFrameByIdRequest {
   google.protobuf.Timestamp end_date = 3;
   uint32 step = 4;
 }
+
+
+
+
+message WaterLog {
+  uint32 id = 1;
+  string device_serial = 2;
+  string username = 3;
+  google.protobuf.Timestamp entry_time = 4;
+  uint32 volume = 5;
+}
+
+
+message CreateWaterLogBySerialRequest {
+  string device_serial = 1;
+  google.protobuf.Timestamp entry_time = 2;
+  uint32 volume = 3;
+}
+
+message CreateWaterLogByDeviceIdRequest {
+  uint32 device_id = 1;
+  google.protobuf.Timestamp entry_time = 2;
+  uint32 volume = 3;
+}
+
+
+
+message GetWaterLogsResponse {
+  repeated WaterLog water_logs = 1;
+  uint32 farm_id = 2;
+}

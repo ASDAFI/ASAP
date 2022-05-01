@@ -12,6 +12,6 @@ type CreateDeviceLogCommand struct {
 type CreateWaterLogCommand struct {
 	DeviceSerial string
 	UserId       uint
-	Volume       float32
+	Volume       uint
 	EntryTime    time.Time
 }

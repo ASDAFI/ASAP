@@ -1,0 +1,11 @@
+syntax = "proto3";
+package messages.farm;
+option go_package = "farm/src/proto/messages/farm";
+
+
+message Farm {
+  uint32 id = 1;
+  string name = 2;
+  string production = 3;
+
+}

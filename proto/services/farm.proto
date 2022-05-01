@@ -7,6 +7,8 @@ import "google/protobuf/empty.proto";
 import "messages/user.proto";
 import "messages/device.proto";
 import "messages/log.proto";
+import "messages/farm.proto";
+
 
 
 option go_package = "farm/src/proto/services/farm";
@@ -16,18 +18,29 @@ service FarmServer {
     option (google.api.http) = {
       post: "/login"
       body: "*"
+      // checked!
+    };
+  }
+
+  rpc Logout (google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/logout"
+      body: "*"
+      // checked!
     };
   }
 
   rpc GetUser (google.protobuf.Empty) returns (messages.user.User) {
     option (google.api.http) = {
       get: "/user"
+      // checked!
     };
   }
   rpc CreateDevice (messages.device.CreateDeviceRequest) returns (messages.device.CreateDeviceResponse) {
     option (google.api.http) = {
       post: "/device/create"
       body: "*"
+      // checked!
     };
   }
   rpc GetDeviceById (messages.device.GetDeviceByIdRequest) returns (messages.device.Device) {
@@ -45,19 +58,69 @@ service FarmServer {
   rpc GetDevices (google.protobuf.Empty) returns (messages.device.Devices) {
     option (google.api.http) = {
       get: "/device/all"
-
+      // checked!
     };
   }
   rpc GetDeviceDataFrameBySerial (messages.log.GetDeviceDataFrameBySerialRequest) returns (messages.log.DeviceDataFrame) {
     option (google.api.http) = {
       post: "/device/logs/serial"
       body: "*"
+      // checked!
     };
   }
   rpc GetDeviceDataFrameById (messages.log.GetDeviceDataFrameByIdRequest) returns (messages.log.DeviceDataFrame) {
     option (google.api.http) = {
       post: "/device/logs/id"
       body: "*"
+      // checked!
     };
   }
+
+  rpc GetAllDeviceDataFramesById (messages.log.GetDeviceDataFrameByIdRequest) returns (messages.log.DeviceDataFrame) {
+    option (google.api.http) = {
+      post: "/device/logs/id/all"
+      body: "*"
+      // checked!
+    };
+  }
+
+  rpc GetAllDeviceDataFramesBySerial (messages.log.GetDeviceDataFrameBySerialRequest) returns (messages.log.DeviceDataFrame) {
+    option (google.api.http) = {
+      post: "/device/logs/serial/all"
+      body: "*"
+      // checked!
+    };
+  }
+
+  rpc CreateWaterLogBySerial (messages.log.CreateWaterLogBySerialRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/water/logs/create/serial"
+      body: "*"
+    };
+    // checked!
+  }
+  rpc CreateWaterLogByDeviceId (messages.log.CreateWaterLogByDeviceIdRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/device/logs/create/device_id"
+      body: "*"
+    };
+    // checked!
+  }
+
+  rpc GetWaterLogs (google.protobuf.Empty) returns (messages.log.GetWaterLogsResponse) {
+    option (google.api.http) = {
+      post: "/water/logs"
+      body: "*"
+    };
+    //checked!
+  }
+
+  rpc GetFarm (google.protobuf.Empty) returns (messages.farm.Farm) {
+    option (google.api.http) = {
+      get: "/farm"
+    };
+  }
+
+
+
 }
