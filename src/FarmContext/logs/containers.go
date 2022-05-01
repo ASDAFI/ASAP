@@ -9,7 +9,7 @@ type DeviceLog struct {
 	DeviceSerial string    `gorm:"column:device_serial"`
 	DeviceTime   time.Time `gorm:"column:datetime;" sql:"index:device_time_idx"`
 	ServerTime   time.Time `gorm:"column:server_time"`
-	Humidity     float32   `gorm:"column:humidity"`
+	Humidity     uint      `gorm:"column:humidity"`
 }
 
 type WaterLog struct {
@@ -24,7 +24,7 @@ type CreateDeviceLogParameters struct {
 	DeviceSerial string
 	DeviceTime   time.Time
 	ServerTime   time.Time
-	Humidity     float32
+	Humidity     uint
 }
 
 type CreateWaterLogParameters struct {
@@ -61,4 +61,3 @@ func (WaterLog) TableName() string {
 func (DeviceLog) TableName() string {
 	return "device_log"
 }
-

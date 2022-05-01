@@ -7,17 +7,16 @@ import (
 
 type LogQueryHandler struct {
 	deviceLogRepository IDeviceLogRepository
-	waterLogRepository IWaterLogRepository
-	deviceRepository   devices.IRepository
+	waterLogRepository  IWaterLogRepository
+	deviceRepository    devices.IRepository
 }
 
-
 func NewLogQueryHandler(deviceLogRepository IDeviceLogRepository, waterLogRepository IWaterLogRepository,
-					    deviceRepository devices.IRepository ) *LogQueryHandler {
+	deviceRepository devices.IRepository) *LogQueryHandler {
 	return &LogQueryHandler{
 		deviceLogRepository: deviceLogRepository,
-		waterLogRepository: waterLogRepository,
-		deviceRepository: deviceRepository,
+		waterLogRepository:  waterLogRepository,
+		deviceRepository:    deviceRepository,
 	}
 }
 
@@ -34,14 +33,14 @@ func (h *LogQueryHandler) GetDataFrameByDeviceId(ctx context.Context, query *Get
 	}
 
 	dataFrame := make([]*DeviceLog, 0)
-	for i :=0 ; i < len(dataFrame); i = i + query.Step {
+	for i := 0; i < len(dataFrame); i = i + query.Step {
 		dataFrame = append(dataFrame, deviceLogs[i])
 	}
 
 	return dataFrame, nil
 }
 
-func (h *LogQueryHandler) GetDataFrameBySerial(ctx context.Context, query *GetDataFrameBySerialQuery) ([]*DeviceLog, error) {
+func (h *LogQueryHandler) GetDataFrameBySerial(ctx context.Context, query GetDataFrameBySerialQuery) ([]*DeviceLog, error) {
 	_, err := h.deviceRepository.FindBySerial(ctx, query.DeviceSerial)
 
 	if err != nil {
@@ -54,14 +53,14 @@ func (h *LogQueryHandler) GetDataFrameBySerial(ctx context.Context, query *GetDa
 	}
 
 	dataFrame := make([]*DeviceLog, 0)
-	for i :=0 ; i < len(dataFrame); i = i + query.Step {
+	for i := 0; i < len(dataFrame); i = i + query.Step {
 		dataFrame = append(dataFrame, deviceLogs[i])
 	}
 
 	return dataFrame, nil
 }
 
-func (h *LogQueryHandler) GetWaterLogByDeviceId(ctx context.Context, query *GetWaterLogByDeviceIdQuery) ([]*WaterLog, error) {
+func (h *LogQueryHandler) GetWaterLogByDeviceId(ctx context.Context, query GetWaterLogByDeviceIdQuery) ([]*WaterLog, error) {
 	_, err := h.deviceRepository.FindById(ctx, query.DeviceId)
 
 	if err != nil {
@@ -76,7 +75,7 @@ func (h *LogQueryHandler) GetWaterLogByDeviceId(ctx context.Context, query *GetW
 	return waterLogs, nil
 }
 
-func (h *LogQueryHandler) GetWaterLogBySerial(ctx context.Context, query *GetWaterLogBySerialQuery) ([]*WaterLog, error) {
+func (h *LogQueryHandler) GetWaterLogBySerial(ctx context.Context, query GetWaterLogBySerialQuery) ([]*WaterLog, error) {
 	_, err := h.deviceRepository.FindBySerial(ctx, query.DeviceSerial)
 
 	if err != nil {

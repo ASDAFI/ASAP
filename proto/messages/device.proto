@@ -13,3 +13,27 @@ message CreateDeviceRequest {
 message CreateDeviceResponse {
   uint32 device_id = 1;
 }
+
+message Device {
+  uint32 device_id = 1;
+  string device_serial = 2;
+  string phone = 3;
+  uint32 farm_id = 4;
+}
+
+message Devices {
+  repeated Device devices = 1;
+}
+
+message GetDeviceBySerialRequest {
+  string device_serial = 1;
+}
+
+message GetDeviceByIdRequest {
+  uint32 device_id = 1;
+}
+
+
+
+
+

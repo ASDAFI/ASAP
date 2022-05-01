@@ -10,11 +10,9 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-
 )
 
 func Authenticate(ctx context.Context) (context.Context, error) {
-	log.Print("authenticate.go Authenticate")
 	method, ok := grpc.Method(ctx)
 	if ok && method == "/service.farm.FarmServer/Login" {
 		return ctx, nil

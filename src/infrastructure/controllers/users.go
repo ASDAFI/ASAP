@@ -9,11 +9,6 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-
-
-type FarmServer struct {
-}
-
 func (f FarmServer) Login(ctx context.Context, request *pb_user.LoginRequest) (*pb_user.LoginResponse, error) {
 	log.Info("Receive message to login: ", request.Username)
 	userRepo := users.NewUserRepository(infrastructure.PostgresDBProvider)
@@ -37,12 +32,11 @@ func (f FarmServer) GetUser(ctx context.Context, empty *emptypb.Empty) (*pb_user
 		return nil, err
 	}
 	return &pb_user.User{
-		Username: user.Username,
-		Email: user.Email,
-		Phone : user.Phone,
+		Username:  user.Username,
+		Email:     user.Email,
+		Phone:     user.Phone,
 		FirstName: user.FirstName,
-		LastName: user.LastName,
+		LastName:  user.LastName,
 	}, nil
-
 
 }

@@ -1,0 +1,30 @@
+syntax = "proto3";
+package messages.log;
+import "google/protobuf/timestamp.proto";
+option go_package = "farm/src/proto/messages/log";
+
+message DeviceLog{
+  google.protobuf.Timestamp device_time = 1;
+  google.protobuf.Timestamp server_time = 2;
+  uint32 humidity = 3;
+}
+
+message DeviceDataFrame {
+  uint32 device_id = 1;
+  string device_serial = 2;
+  repeated DeviceLog device_logs = 3;
+}
+
+message GetDeviceDataFrameBySerialRequest {
+  string device_serial = 1;
+  google.protobuf.Timestamp start_date = 2;
+  google.protobuf.Timestamp end_date = 3;
+  uint32 step = 4;
+}
+
+message GetDeviceDataFrameByIdRequest {
+  uint32 device_id = 1;
+  google.protobuf.Timestamp start_date = 2;
+  google.protobuf.Timestamp end_date = 3;
+  uint32 step = 4;
+}

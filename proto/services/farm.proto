@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "messages/user.proto";
 import "messages/device.proto";
+import "messages/log.proto";
 
 
 option go_package = "farm/src/proto/services/farm";
@@ -29,6 +30,34 @@ service FarmServer {
       body: "*"
     };
   }
+  rpc GetDeviceById (messages.device.GetDeviceByIdRequest) returns (messages.device.Device) {
+    option (google.api.http) = {
+      post: "/device/id"
+      body: "*"
+    };
+  }
+  rpc GetDeviceBySerial (messages.device.GetDeviceBySerialRequest) returns (messages.device.Device) {
+    option (google.api.http) = {
+      post: "/device/serial"
+      body: "*"
+    };
+  }
+  rpc GetDevices (google.protobuf.Empty) returns (messages.device.Devices) {
+    option (google.api.http) = {
+      get: "/device/all"
 
-
+    };
+  }
+  rpc GetDeviceDataFrameBySerial (messages.log.GetDeviceDataFrameBySerialRequest) returns (messages.log.DeviceDataFrame) {
+    option (google.api.http) = {
+      post: "/device/logs/serial"
+      body: "*"
+    };
+  }
+  rpc GetDeviceDataFrameById (messages.log.GetDeviceDataFrameByIdRequest) returns (messages.log.DeviceDataFrame) {
+    option (google.api.http) = {
+      post: "/device/logs/id"
+      body: "*"
+    };
+  }
 }
