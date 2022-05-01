@@ -6,7 +6,7 @@ type CreateDeviceLogCommand struct {
 	DeviceSerial string
 	DeviceTime   time.Time
 	ServerTime   time.Time
-	Humidity     float32
+	Humidity     uint
 }
 
 type CreateWaterLogCommand struct {
