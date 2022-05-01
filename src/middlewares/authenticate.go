@@ -6,7 +6,6 @@ import (
 	"farm/src/infrastructure"
 	"github.com/dgrijalva/jwt-go"
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
-	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -33,7 +32,6 @@ func Authenticate(ctx context.Context) (context.Context, error) {
 	})
 	err2 := infrastructure.PostgresDBProvider.DB.Table(users.AuthToken{}.TableName()).Take(tk).Error
 	if err != nil || err2 != nil {
-		log.Info(err)
 		return nil, grpc.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
 	}
 
