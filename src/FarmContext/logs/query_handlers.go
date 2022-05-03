@@ -2,6 +2,7 @@ package logs
 
 import (
 	"context"
+	"errors"
 	"farm/src/FarmContext/devices"
 	"farm/src/FarmContext/farm"
 )
@@ -24,6 +25,10 @@ func NewLogQueryHandler(deviceLogRepository IDeviceLogRepository, waterLogReposi
 }
 
 func (h *LogQueryHandler) GetDataFrameByDeviceId(ctx context.Context, query *GetDataFrameByDeviceIdQuery) ([]*DeviceLog, error) {
+	if query.Step <= 0 {
+		return nil, errors.New("step should be posetive.")
+	}
+
 	_, err := h.deviceRepository.FindById(ctx, query.DeviceId)
 
 	if err != nil {
@@ -46,6 +51,9 @@ func (h *LogQueryHandler) GetDataFrameByDeviceId(ctx context.Context, query *Get
 func (h *LogQueryHandler) GetDataFrameBySerial(ctx context.Context, query GetDataFrameBySerialQuery) ([]*DeviceLog, error) {
 	_, err := h.deviceRepository.FindBySerial(ctx, query.DeviceSerial)
 
+	if query.Step <= 0 {
+		return nil, errors.New("step should be posetive.")
+	}
 	if err != nil {
 		return nil, err
 	}

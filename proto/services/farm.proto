@@ -80,7 +80,7 @@ service FarmServer {
     option (google.api.http) = {
       post: "/device/logs/id/all"
       body: "*"
-      // checked!
+      // checked!information_schema
     };
   }
 

@@ -55,7 +55,9 @@ func (f FarmServer) GetDeviceDataFrameBySerial(ctx context.Context, request *pb_
 	}
 
 	dataFrames, err := logQHandler.GetDataFrameBySerial(ctx, deviceLogQuery)
-
+	if err != nil {
+		return nil, err
+	}
 	var deviceLogs []*pb_log.DeviceLog
 	for _, frame := range dataFrames {
 		serverTime, err := ptypes.TimestampProto(frame.ServerTime)
@@ -124,7 +126,9 @@ func (f FarmServer) GetDeviceDataFrameById(ctx context.Context, request *pb_log.
 	}
 
 	dataFrames, err := logQHandler.GetDataFrameBySerial(ctx, deviceLogQuery)
-
+	if err != nil {
+		return nil, err
+	}
 	var deviceLogs []*pb_log.DeviceLog
 	for _, frame := range dataFrames {
 		serverTime, err := ptypes.TimestampProto(frame.ServerTime)
