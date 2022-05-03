@@ -16,3 +16,8 @@ database:
 credential:
   tokensecret: secret
 
+mqtt:
+  port: 1883
+  password: 1234
+  username: aryan
+  host: asap.carriot.ir

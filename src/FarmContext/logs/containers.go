@@ -6,6 +6,7 @@ import (
 )
 
 type DeviceLog struct {
+	ID           uint      `gorm:"primarykey"`
 	DeviceSerial string    `gorm:"column:device_serial"`
 	DeviceTime   time.Time `gorm:"column:datetime;" sql:"index:device_time_idx"`
 	ServerTime   time.Time `gorm:"column:server_time"`
