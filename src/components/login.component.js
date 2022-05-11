@@ -54,7 +54,7 @@ export default class Login extends Component {
             return < Navigate to="/"/>;
         }
         return (
-            <form  onSubmit={this.onSubmit}>
+            <form  style={{ }} onSubmit={this.onSubmit}>
                 <h3>Log in</h3>
                 <div className="form-group" >
                     <label>Username</label>
