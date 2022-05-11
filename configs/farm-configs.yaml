@@ -4,7 +4,7 @@ server:
   httpport: 8000
 
 database:
-  host: localhost
+  host: 79.175.177.52
   port: 5432
   user: asap
   password: asapDB!

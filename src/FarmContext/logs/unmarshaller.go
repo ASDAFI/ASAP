@@ -124,6 +124,8 @@ func (u *Unmarshaller) Unmarshal(ctx context.Context, message DeviceLogMessage) 
 	humidity := uint(pureDeviceLog.Data[17])
 	serverTIme := time.Now().UTC()
 
+	checkHumidity(humidity, deviceSerial, ctx)
+
 	log.WithFields(log.Fields{
 		"deviceSerial": deviceSerial,
 		"logFromPast":  logFromPast,
