@@ -6,6 +6,7 @@ type Alert struct {
 	gorm.Model
 	DeviceSerial string `gorm:"column:device_serial"`
 	Text         string
+	Humidity     uint
 }
 
 type CreateAlertParameters struct {
@@ -18,6 +19,7 @@ func NewAlert(parameters CreateAlertParameters) (*Alert, error) {
 	alert := &Alert{
 		DeviceSerial: parameters.DeviceSerial,
 		Text:         parameters.Text,
+		Humidity:     parameters.Humidity,
 	}
 
 	return alert, alert.validateForCreateNewInstance()

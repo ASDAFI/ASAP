@@ -9,7 +9,7 @@ type AlertRepository struct {
 	dBInfrastructure infrastructure.DBProvider
 }
 
-func NewAlertRepository(dBInfrastructure infrastructure.DBProvider) *AlertRepository {
+func NewAlertRepository(dBInfrastructure infrastructure.DBProvider) *IRepository {
 	return &AlertRepository{dBInfrastructure: dBInfrastructure}
 }
 
