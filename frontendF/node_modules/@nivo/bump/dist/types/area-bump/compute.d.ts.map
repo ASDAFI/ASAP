@@ -1,0 +1,1 @@
+{"version":3,"file":"compute.d.ts","sourceRoot":"","sources":["../../../src/area-bump/compute.ts"],"names":[],"mappings":"AACA,OAAO,EAAmC,UAAU,EAAE,WAAW,EAAE,MAAM,cAAc,CAAA;AACvF,OAAO,EACH,mBAAmB,EACnB,qBAAqB,EACrB,iBAAiB,EACjB,aAAa,EACb,uBAAuB,EAC1B,MAAM,SAAS,CAAA;AAEhB,eAAO,MAAM,aAAa;;WAYf,MAAM;YACL,MAAM;;;;;;;iBAUD,YAAY,MAAM,CAAC;CA0InC,CAAA"}

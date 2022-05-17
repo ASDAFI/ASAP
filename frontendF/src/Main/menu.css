@@ -1,0 +1,10 @@
+.menuItem {
+  transition: 0.2s ease;
+}
+.menuItem:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.menuItem:active {
+  transform: scale(1.2);
+}
