@@ -127,5 +127,16 @@ service FarmServer {
       body: "*"
     };
   }
+  rpc GetAllAlerts (google.protobuf.Empty) returns (messages.device.Alerts) {
+    option (google.api.http) = {
+      get: "/alerts/all"
+    };
+  }
+
+  rpc GetRecentAlerts (google.protobuf.Empty) returns (messages.device.Alerts) {
+    option (google.api.http) = {
+      get: "/alerts/recent"
+    };
+  }
 
 }

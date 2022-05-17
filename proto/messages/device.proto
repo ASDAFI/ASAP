@@ -8,6 +8,7 @@ message CreateDeviceRequest {
   string device_serial = 1;
   string phone = 2;
   uint32 farm_id = 3;
+
 }
 
 message CreateDeviceResponse {
@@ -19,6 +20,8 @@ message Device {
   string device_serial = 2;
   string phone = 3;
   uint32 farm_id = 4;
+  uint32 min_humidity = 5;
+  uint32 max_humidity = 6;
 }
 
 message Devices {
@@ -37,4 +40,15 @@ message SetUpDeviceHumidityRequest{
   string device_serial = 1;
   uint32 min_humidity = 2;
   uint32 max_humidity = 3;
+}
+
+message Alert {
+  uint32 id = 1;
+  string device_serial = 2;
+  uint32 humidity = 3;
+  string text = 4;
+}
+
+message Alerts {
+  repeated Alert alerts = 1;
 }

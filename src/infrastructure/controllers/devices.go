@@ -50,6 +50,9 @@ func (f FarmServer) CreateDevice(ctx context.Context, request *pb_device.CreateD
 	devicQuery := devices.GetDeviceBySerialQuery{DeviceSerial: request.GetDeviceSerial()}
 	device, err := deviceQHandler.GetDeviceBySerial(ctx, devicQuery)
 
+	if err != nil {
+		return nil, err
+	}
 	return &pb_device.CreateDeviceResponse{
 		DeviceId: uint32(device.ID),
 	}, nil
@@ -89,6 +92,8 @@ func (f FarmServer) GetDeviceById(ctx context.Context, request *pb_device.GetDev
 		DeviceSerial: device.DeviceSerial,
 		Phone:        device.Phone,
 		FarmId:       uint32(device.FarmID),
+		MaxHumidity:  uint32(device.MaxHumidity),
+		MinHumidity:  uint32(device.MinHumidity),
 	}, nil
 }
 
@@ -125,6 +130,8 @@ func (f FarmServer) GetDeviceBySerial(ctx context.Context, request *pb_device.Ge
 		DeviceSerial: device.DeviceSerial,
 		Phone:        device.Phone,
 		FarmId:       uint32(device.FarmID),
+		MaxHumidity:  uint32(device.MaxHumidity),
+		MinHumidity:  uint32(device.MinHumidity),
 	}, nil
 }
 
@@ -160,6 +167,8 @@ func (f FarmServer) GetDevices(ctx context.Context, empty *emptypb.Empty) (*pb_d
 			DeviceSerial: device.DeviceSerial,
 			Phone:        device.Phone,
 			FarmId:       uint32(device.FarmID),
+			MaxHumidity:  uint32(device.MaxHumidity),
+			MinHumidity:  uint32(device.MinHumidity),
 		})
 	}
 

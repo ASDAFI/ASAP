@@ -24,3 +24,7 @@ func NewAlert(parameters CreateAlertParameters) (*Alert, error) {
 
 	return alert, alert.validateForCreateNewInstance()
 }
+
+func (Alert) TableName() string {
+	return "alert"
+}

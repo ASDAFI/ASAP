@@ -4,6 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"farm/src/FarmContext/alerts"
+	"farm/src/FarmContext/devices"
 	log "github.com/sirupsen/logrus"
 	"strconv"
 	"strings"
@@ -11,7 +13,8 @@ import (
 )
 
 type Unmarshaller struct {
-	logRepository IDeviceLogRepository
+	logRepository    IDeviceLogRepository
+	deviceRepository devices.IRepository
 }
 type PureDeviceLog struct {
 	Data []float64 `json:"data"`
@@ -22,8 +25,8 @@ type DeviceLogMessage struct {
 	Topic   string
 }
 
-func NewUnmarshaller(logRepository IDeviceLogRepository) *Unmarshaller {
-	return &Unmarshaller{logRepository: logRepository}
+func NewUnmarshaller(logRepository IDeviceLogRepository, deviceRepository devices.IRepository) *Unmarshaller {
+	return &Unmarshaller{logRepository: logRepository, deviceRepository: deviceRepository}
 }
 
 func (u *Unmarshaller) Unmarshal(ctx context.Context, message DeviceLogMessage) error {
@@ -36,7 +39,12 @@ func (u *Unmarshaller) Unmarshal(ctx context.Context, message DeviceLogMessage) 
 	}
 
 	deviceSerial := splitedTopic[2]
+	_, err := u.deviceRepository.FindBySerial(ctx, deviceSerial)
 
+	if err != nil {
+		log.WithFields(log.Fields{"deviceSerial": deviceSerial}).Errorln("Device not found.")
+		return errors.New("Device not found")
+	}
 	logFromPast := false
 	// remove {ee} from the payload
 	stringMessage := string(message.PayLoad)
@@ -50,7 +58,7 @@ func (u *Unmarshaller) Unmarshal(ctx context.Context, message DeviceLogMessage) 
 	// Unmarshal the payload
 	message.PayLoad = []byte(stringMessage)
 	var pureDeviceLog PureDeviceLog
-	err := json.Unmarshal(message.PayLoad, &pureDeviceLog)
+	err = json.Unmarshal(message.PayLoad, &pureDeviceLog)
 
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -121,10 +129,8 @@ func (u *Unmarshaller) Unmarshal(ctx context.Context, message DeviceLogMessage) 
 	deviceTime := time.Date(int(year), time.Month(month), int(day), int(hour), int(minute), int(second), 0, time.UTC)
 
 	// Save the device log
-	humidity := uint(pureDeviceLog.Data[17])
+	humidity := uint(float32(1024-uint(pureDeviceLog.Data[19])) / 1024 * 100)
 	serverTIme := time.Now().UTC()
-
-	checkHumidity(humidity, deviceSerial, ctx)
 
 	log.WithFields(log.Fields{
 		"deviceSerial": deviceSerial,
@@ -138,6 +144,9 @@ func (u *Unmarshaller) Unmarshal(ctx context.Context, message DeviceLogMessage) 
 		DeviceTime:   deviceTime,
 		Humidity:     humidity,
 		ServerTime:   serverTIme,
+	}
+	if logFromPast == false {
+		alerts.CheckAlert(ctx, deviceSerial, humidity)
 	}
 	return u.logRepository.Save(ctx, deviceLog)
 }

@@ -2,6 +2,7 @@ package devices
 
 import (
 	"context"
+	"errors"
 	"farm/src/infrastructure"
 )
 
@@ -13,24 +14,27 @@ func NewDeviceRepository(dBInfrastructure infrastructure.DBProvider) *DeviceRepo
 	return &DeviceRepository{dBInfrastructure: dBInfrastructure}
 }
 
-
 func (r *DeviceRepository) Save(ctx context.Context, device *Device) error {
 	return r.dBInfrastructure.DB.WithContext(ctx).Save(device).Error
 }
 
-
 func (r *DeviceRepository) FindById(ctx context.Context, deviceId uint) (*Device, error) {
 	device := &Device{}
 	err := r.dBInfrastructure.DB.WithContext(ctx).Where("id = ?", deviceId).Find(device).Error
+	if device.ID != deviceId {
+		return nil, errors.New("device not found")
+	}
 	return device, err
 
 }
 
-
 func (r *DeviceRepository) FindBySerial(ctx context.Context, deviceSerial string) (*Device, error) {
-	log := &Device{}
-	err := r.dBInfrastructure.DB.WithContext(ctx).Where("device_serial = ?", deviceSerial).Find(log).Error
-	return log, err
+	device := &Device{}
+	err := r.dBInfrastructure.DB.WithContext(ctx).Where("device_serial = ?", deviceSerial).Find(device).Error
+	if device.DeviceSerial != deviceSerial {
+		return nil, errors.New("device not found")
+	}
+	return device, err
 }
 
 func (r *DeviceRepository) GetAll(ctx context.Context) ([]*Device, error) {

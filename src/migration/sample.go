@@ -1,7 +1,7 @@
-
 package migration
 
 import (
+	"farm/src/FarmContext/alerts"
 	"farm/src/FarmContext/devices"
 	"farm/src/FarmContext/farm"
 	"farm/src/FarmContext/logs"
@@ -11,13 +11,12 @@ import (
 	"gorm.io/gorm"
 )
 
-
 func MigrateDB() error {
 
 	dbProvider := infrastructure.PostgresDBProvider
 
 	err := dbProvider.DB.AutoMigrate(&farm.Farm{}, &users.User{},
-		&devices.Device{}, &logs.DeviceLog{}, &logs.WaterLog{}, &users.AuthToken{})
+		&devices.Device{}, &logs.DeviceLog{}, &logs.WaterLog{}, &users.AuthToken{}, &alerts.Alert{})
 	if err != nil {
 		return err
 	}
@@ -45,4 +44,3 @@ func createUniqueIndex(provider *gorm.DB) {
 func foreignKeyIndex(provider *gorm.DB) {
 
 }
-

@@ -3,6 +3,7 @@ package cli
 import (
 	"context"
 	"farm/configs"
+	"farm/src/FarmContext/devices"
 	"farm/src/FarmContext/logs"
 	"farm/src/infrastructure"
 	"farm/src/infrastructure/consumer"
@@ -30,7 +31,8 @@ func subscribe() {
 		log.Panic(err)
 	}
 	ctx := context.Background()
-	handler := logs.NewUnmarshaller(logs.NewDeviceLogRepository(infrastructure.PostgresDBProvider))
+	handler := logs.NewUnmarshaller(logs.NewDeviceLogRepository(infrastructure.PostgresDBProvider),
+		devices.NewDeviceRepository(infrastructure.PostgresDBProvider))
 	client.Subscribe("fleet/v1/#", 0, func(client mqtt.Client, message mqtt.Message) {
 		handler.Unmarshal(ctx, logs.DeviceLogMessage{
 			PayLoad: message.Payload(),

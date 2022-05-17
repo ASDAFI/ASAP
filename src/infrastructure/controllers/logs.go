@@ -398,11 +398,16 @@ func (f FarmServer) GetWaterLogs(ctx context.Context, empty *empty.Empty) (*pb_l
 			return nil, err
 		}
 
+		entryTime, err := ptypes.TimestampProto(waterLog.EntryTime)
+		if err != nil {
+			return nil, err
+		}
+
 		waterLogsResponse[i] = &pb_log.WaterLog{
 			Id:           uint32(waterLog.ID),
 			DeviceSerial: waterLog.DeviceSerial,
 			Volume:       uint32(waterLog.Volume),
-			EntryTime:    ptypes.TimestampNow(),
+			EntryTime:    entryTime,
 			Username:     user.Username,
 		}
 	}

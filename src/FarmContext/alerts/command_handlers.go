@@ -3,10 +3,10 @@ package alerts
 import "context"
 
 type CommandHandler struct {
-	AlertRepository *IRepository
+	AlertRepository IRepository
 }
 
-func NewCommandHandler(alertRepo *IRepository) *CommandHandler {
+func NewCommandHandler(alertRepo IRepository) *CommandHandler {
 	return &CommandHandler{alertRepo}
 }
 
