@@ -342,6 +342,69 @@ func (x *GetDeviceByIdRequest) GetDeviceId() uint32 {
 	return 0
 }
 
+type SetUpDeviceHumidityRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	DeviceSerial string `protobuf:"bytes,1,opt,name=device_serial,json=deviceSerial,proto3" json:"device_serial,omitempty"`
+	MinHumidity  uint32 `protobuf:"varint,2,opt,name=min_humidity,json=minHumidity,proto3" json:"min_humidity,omitempty"`
+	MaxHumidity  uint32 `protobuf:"varint,3,opt,name=max_humidity,json=maxHumidity,proto3" json:"max_humidity,omitempty"`
+}
+
+func (x *SetUpDeviceHumidityRequest) Reset() {
+	*x = SetUpDeviceHumidityRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_messages_device_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetUpDeviceHumidityRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetUpDeviceHumidityRequest) ProtoMessage() {}
+
+func (x *SetUpDeviceHumidityRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_messages_device_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetUpDeviceHumidityRequest.ProtoReflect.Descriptor instead.
+func (*SetUpDeviceHumidityRequest) Descriptor() ([]byte, []int) {
+	return file_messages_device_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SetUpDeviceHumidityRequest) GetDeviceSerial() string {
+	if x != nil {
+		return x.DeviceSerial
+	}
+	return ""
+}
+
+func (x *SetUpDeviceHumidityRequest) GetMinHumidity() uint32 {
+	if x != nil {
+		return x.MinHumidity
+	}
+	return 0
+}
+
+func (x *SetUpDeviceHumidityRequest) GetMaxHumidity() uint32 {
+	if x != nil {
+		return x.MaxHumidity
+	}
+	return 0
+}
+
 var File_messages_device_proto protoreflect.FileDescriptor
 
 var file_messages_device_proto_rawDesc = []byte{
@@ -376,10 +439,18 @@ var file_messages_device_proto_rawDesc = []byte{
 	0x61, 0x6c, 0x22, 0x33, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x44, 0x65, 0x76, 0x69, 0x63, 0x65, 0x42,
 	0x79, 0x49, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x64, 0x65,
 	0x76, 0x69, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x64,
-	0x65, 0x76, 0x69, 0x63, 0x65, 0x49, 0x64, 0x42, 0x20, 0x5a, 0x1e, 0x66, 0x61, 0x72, 0x6d, 0x2f,
-	0x73, 0x72, 0x63, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x73, 0x2f, 0x64, 0x65, 0x76, 0x69, 0x63, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x65, 0x76, 0x69, 0x63, 0x65, 0x49, 0x64, 0x22, 0x87, 0x01, 0x0a, 0x1a, 0x53, 0x65, 0x74, 0x55,
+	0x70, 0x44, 0x65, 0x76, 0x69, 0x63, 0x65, 0x48, 0x75, 0x6d, 0x69, 0x64, 0x69, 0x74, 0x79, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x65, 0x76, 0x69, 0x63, 0x65,
+	0x5f, 0x73, 0x65, 0x72, 0x69, 0x61, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x64,
+	0x65, 0x76, 0x69, 0x63, 0x65, 0x53, 0x65, 0x72, 0x69, 0x61, 0x6c, 0x12, 0x21, 0x0a, 0x0c, 0x6d,
+	0x69, 0x6e, 0x5f, 0x68, 0x75, 0x6d, 0x69, 0x64, 0x69, 0x74, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0d, 0x52, 0x0b, 0x6d, 0x69, 0x6e, 0x48, 0x75, 0x6d, 0x69, 0x64, 0x69, 0x74, 0x79, 0x12, 0x21,
+	0x0a, 0x0c, 0x6d, 0x61, 0x78, 0x5f, 0x68, 0x75, 0x6d, 0x69, 0x64, 0x69, 0x74, 0x79, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0d, 0x52, 0x0b, 0x6d, 0x61, 0x78, 0x48, 0x75, 0x6d, 0x69, 0x64, 0x69, 0x74,
+	0x79, 0x42, 0x20, 0x5a, 0x1e, 0x66, 0x61, 0x72, 0x6d, 0x2f, 0x73, 0x72, 0x63, 0x2f, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x2f, 0x64, 0x65, 0x76,
+	0x69, 0x63, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -394,14 +465,15 @@ func file_messages_device_proto_rawDescGZIP() []byte {
 	return file_messages_device_proto_rawDescData
 }
 
-var file_messages_device_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_messages_device_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_messages_device_proto_goTypes = []interface{}{
-	(*CreateDeviceRequest)(nil),      // 0: messages.device.CreateDeviceRequest
-	(*CreateDeviceResponse)(nil),     // 1: messages.device.CreateDeviceResponse
-	(*Device)(nil),                   // 2: messages.device.Device
-	(*Devices)(nil),                  // 3: messages.device.Devices
-	(*GetDeviceBySerialRequest)(nil), // 4: messages.device.GetDeviceBySerialRequest
-	(*GetDeviceByIdRequest)(nil),     // 5: messages.device.GetDeviceByIdRequest
+	(*CreateDeviceRequest)(nil),        // 0: messages.device.CreateDeviceRequest
+	(*CreateDeviceResponse)(nil),       // 1: messages.device.CreateDeviceResponse
+	(*Device)(nil),                     // 2: messages.device.Device
+	(*Devices)(nil),                    // 3: messages.device.Devices
+	(*GetDeviceBySerialRequest)(nil),   // 4: messages.device.GetDeviceBySerialRequest
+	(*GetDeviceByIdRequest)(nil),       // 5: messages.device.GetDeviceByIdRequest
+	(*SetUpDeviceHumidityRequest)(nil), // 6: messages.device.SetUpDeviceHumidityRequest
 }
 var file_messages_device_proto_depIdxs = []int32{
 	2, // 0: messages.device.Devices.devices:type_name -> messages.device.Device
@@ -490,6 +562,18 @@ func file_messages_device_proto_init() {
 				return nil
 			}
 		}
+		file_messages_device_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SetUpDeviceHumidityRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -497,7 +581,7 @@ func file_messages_device_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_messages_device_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

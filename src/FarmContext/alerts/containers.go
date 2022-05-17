@@ -11,6 +11,7 @@ type Alert struct {
 type CreateAlertParameters struct {
 	DeviceSerial string
 	Text         string
+	Humidity     uint
 }
 
 func NewAlert(parameters CreateAlertParameters) (*Alert, error) {

@@ -9,8 +9,8 @@ type Device struct {
 	DeviceSerial string `gorm:"column:device_serial"`
 	Phone        string `gorm:"column:phone"`
 	FarmID       uint
-	MinHumidity  uint
-	MaxHumidity  uint
+	MinHumidity  uint `gorm:"column:min_humidity"`
+	MaxHumidity  uint `gorm:"column:max_humidity"`
 }
 
 type CreateDeviceParameters struct {
@@ -24,6 +24,8 @@ func NewDevice(parameters CreateDeviceParameters) (*Device, error) {
 		DeviceSerial: parameters.DeviceSerial,
 		Phone:        parameters.Phone,
 		FarmID:       parameters.FarmID,
+		MinHumidity:  0,
+		MaxHumidity:  1024,
 	}
 
 	return device, device.validateForCreateNewInstance()

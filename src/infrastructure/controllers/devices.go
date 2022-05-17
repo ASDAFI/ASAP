@@ -8,6 +8,7 @@ import (
 	"farm/src/FarmContext/users"
 	"farm/src/infrastructure"
 	pb_device "farm/src/proto/messages/device"
+	"github.com/golang/protobuf/ptypes/empty"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
@@ -165,4 +166,22 @@ func (f FarmServer) GetDevices(ctx context.Context, empty *emptypb.Empty) (*pb_d
 	return &pb_device.Devices{
 		Devices: deviceList,
 	}, nil
+}
+
+func (FarmServer) SetUpHumidity(ctx context.Context, request *pb_device.SetUpDeviceHumidityRequest) (*empty.Empty, error) {
+	userId := ctx.Value("user_id").(uint)
+	log.Info("SetHumidity -- userId: ", userId)
+
+	deviceRepo := devices.NewDeviceRepository(infrastructure.PostgresDBProvider)
+	farmRepo := farm.NewFarmRepository(infrastructure.PostgresDBProvider)
+	deviceCommandHandler := devices.NewCommandHandler(deviceRepo, farmRepo)
+	deviceCommand := devices.AlertSetUpCommand{DeviceSerial: request.GetDeviceSerial(),
+		MinHumidity: uint(request.GetMinHumidity()), MaxHumidity: uint(request.GetMaxHumidity())}
+
+	err := deviceCommandHandler.SetUpAlert(ctx, deviceCommand)
+	//SetUpAlert(devices.SetUpAlertParameters{Device: dev, MinHumidity: uint(request.MinHumidity), MaxHumidity: uint(request.MaxHumidity)})
+	if err != nil {
+		return nil, err
+	}
+	return &empty.Empty{}, nil
 }

@@ -33,7 +33,8 @@ message GetDeviceByIdRequest {
   uint32 device_id = 1;
 }
 
-
-
-
-
+message SetUpDeviceHumidityRequest{
+  string device_serial = 1;
+  uint32 min_humidity = 2;
+  uint32 max_humidity = 3;
+}

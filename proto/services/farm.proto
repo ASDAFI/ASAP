@@ -121,6 +121,11 @@ service FarmServer {
     };
   }
 
-
+  rpc SetUpHumidity (messages.device.SetUpDeviceHumidityRequest) returns(google.protobuf.Empty){
+    option (google.api.http) = {
+      post: "/device/set"
+      body: "*"
+    };
+  }
 
 }
