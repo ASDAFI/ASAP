@@ -11,7 +11,7 @@ export const Menu = ({ currentPage, setCurrentPage, farm }) => {
       style={{
         backgroundColor: "#fff",
         width: "20%",
-        borderRadius: 14,
+        borderRadius: 2,
         marginTop: 14,
         paddingLeft: 14,
         paddingRight: 14,

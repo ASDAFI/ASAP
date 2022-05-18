@@ -60,12 +60,12 @@
   outline: none;
 }
 .FButton {
-  background-color: #85ff9d;
+  background-color: rgb(0 204 0);
   border-radius: 14px;
   border: none;
   box-shadow: 0px 0px 2px 2px #ccc;
-  padding: 14px;
-  font-size: 14px;
+  padding: 19px;
+  font-size: 21px;
   font-family: Verdana;
   font-weight: bold;
   transition: 0.2s ease;
