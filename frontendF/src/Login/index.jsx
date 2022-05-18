@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 
+import { FInput } from "./FInput";
+
 import "../App.css";
 
 const Login = () => {
   const [fUsername, setUsername] = useState("");
   const [fPassword, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
+
   const cookies = new Cookies();
   const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ const Login = () => {
       },
       body: JSON.stringify({
         username: username.toLowerCase(),
-        password: password.toLowerCase(),
+        password: password,
       }),
     }).then((response) => {
       if (response.status !== 200) {
@@ -89,7 +92,7 @@ const Login = () => {
         alt="bg"
         style={{
           width: "100%",
-          position: "absolute",
+          position: "fixed",
           left: 0,
           top: 0,
           overflow: "hidden",
@@ -115,13 +118,6 @@ const FLabel = ({ text }) => {
       {text}
     </label>
   );
-};
-
-const FInput = ({ setText }) => {
-  const onChangeText = (e) => {
-    setText(e.target.value);
-  };
-  return <input className="FInput" onChange={onChangeText} />;
 };
 
 export default Login;

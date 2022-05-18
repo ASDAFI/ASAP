@@ -11,7 +11,7 @@ const Intro = () => {
         alt="bg"
         style={{
           width: "100%",
-          position: "absolute",
+          position: "fixed",
           left: 0,
           top: 0,
           overflow: "hidden",

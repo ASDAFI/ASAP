@@ -1,5 +1,8 @@
 .menuItem {
   transition: 0.2s ease;
+  font-size: 16px;
+  color: #000;
+  margin-left: 10px;
 }
 .menuItem:hover {
   transform: scale(1.1);

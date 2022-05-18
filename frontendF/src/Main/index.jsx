@@ -4,15 +4,20 @@ import Cookies from "universal-cookie";
 
 import { Menu } from "./Menu";
 import { WaterLog } from "./WaterLog";
+import { Report } from "./Report";
 import { Loading } from "./Loading";
-import { ReportLog } from "./chart";
-
+import { CreateDevice } from "./CreateDevice";
+import { DeviceConfig } from "./DeviceConfig";
 
 const Main = () => {
   const navigate = useNavigate();
   const cookies = new Cookies();
   const [user, setUser] = useState({});
   const [devices, setDevices] = useState([]);
+  const [farm, setFarm] = useState([]);
+  const [currentPage, setCurrentPage] = useState("waterLog");
+  const [ufHnadler, setUFHandler] = useState({});
+  const [deviceStatus, setDeviceStatus] = useState({});
 
   useEffect(() => {
     if (!cookies.get("token")) {
@@ -34,24 +39,37 @@ const Main = () => {
         }
       });
 
-      fetch("http://asap.carriot.ir:8000/device/all", {
+      fetch("http://asap.carriot.ir:8000/farm", {
         method: "GET",
         headers: {
           Authorization: "Bearer " + cookies.get("token"),
           "content-type": "application/json",
         },
       }).then((res) => {
-        if (res.status !== 200) {
-          alert("an error occurred\nERROR Code : " + res.status);
-        } else {
-          res.json().then((rDevices) => {
-            setDevices(rDevices);
-          });
-        }
+        res.json().then((farm) => {
+          setFarm(farm);
+        });
       });
     }
   }, []);
-
+  useEffect(() => {
+    fetch("http://asap.carriot.ir:8000/device/all", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + cookies.get("token"),
+        "content-type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status !== 200) {
+        alert("an error occurred\nERROR Code : " + res.status);
+      } else {
+        setDeviceStatus(res.status);
+        res.json().then((rDevices) => {
+          setDevices(rDevices);
+        });
+      }
+    });
+  }, [ufHnadler]);
   return (
     <div>
       <img
@@ -59,7 +77,7 @@ const Main = () => {
         alt="bg"
         style={{
           width: "100%",
-          position: "absolute",
+          position: "fixed",
           left: 0,
           top: 0,
           overflow: "hidden",
@@ -74,7 +92,7 @@ const Main = () => {
           width: "70vw",
           // height: 400,
           paddingBottom: 40,
-          marginTop: "8%",
+          marginTop: "4%",
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
@@ -114,6 +132,7 @@ const Main = () => {
                 }}
               >
                 <p style={{ fontSize: 18 }}>
+                  user :{" "}
                   {user.first_name +
                     " " +
                     user.last_name +
@@ -133,7 +152,25 @@ const Main = () => {
                 width: "90%",
               }}
             >
-              <Menu />
+              <Menu
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                farm={farm}
+              />
+            
+              {
+        {
+          "waterLog": <WaterLog devices={devices} />,
+          "createDevice": <CreateDevice
+          farm={farm}
+          setUFHandler={setUFHandler}
+          devices={devices}
+          deviceStatus={deviceStatus}
+        />,
+        "report": <Report devices={devices}/>,
+        "config": <DeviceConfig />
+        }[currentPage]
+      }
             </div>
           </>
         )}
@@ -143,4 +180,3 @@ const Main = () => {
 };
 
 export default Main;
-
