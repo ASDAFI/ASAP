@@ -61,7 +61,7 @@ export const Menu = ({ currentPage, setCurrentPage, farm }) => {
           setCurrentPage("config");
         }}
       >
-        Report
+        Config
       </h5>
       <h5
         className="menuItem"

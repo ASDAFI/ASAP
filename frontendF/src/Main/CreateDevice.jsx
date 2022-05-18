@@ -107,19 +107,19 @@ export const CreateDevice = ({ farm, setUFHandler, devices, deviceStatus }) => {
                   fontWeight: "bold",
                 }}
               >
-                <td>device id</td>
                 <td>serial</td>
                 <td>phone number</td>
-                <td>farm id</td>
+                <td>max hum.</td>
+                <td>min hum</td>
               </tr>
               {devices.devices.map((item) => {
                 const time = new Date(item.entry_time);
                 return (
                   <tr>
-                    <td>{item.device_id}</td>
                     <td>{item.device_serial}</td>
                     <td>{item.phone}</td>
-                    <td>{item.farm_id}</td>
+                    <td>{item.max_humidity}</td>
+                    <td>{item.min_humidity}</td>
                   </tr>
                 );
               })}
