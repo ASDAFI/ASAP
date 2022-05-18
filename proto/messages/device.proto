@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package messages.device;
+import "google/protobuf/timestamp.proto";
 
 option go_package = "farm/src/proto/messages/device";
 
@@ -46,7 +47,8 @@ message Alert {
   uint32 id = 1;
   string device_serial = 2;
   uint32 humidity = 3;
-  string text = 4;
+  google.protobuf.Timestamp date = 4;
+  string text = 5;
 }
 
 message Alerts {

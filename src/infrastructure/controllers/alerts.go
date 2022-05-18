@@ -7,6 +7,7 @@ import (
 	"farm/src/FarmContext/users"
 	"farm/src/infrastructure"
 	pb_device "farm/src/proto/messages/device"
+	"github.com/golang/protobuf/ptypes"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
@@ -48,11 +49,16 @@ func (f *FarmServer) GetAllAlerts(ctx context.Context, empty *emptypb.Empty) (*p
 			return nil, err
 		}
 		for _, alert := range fetchedAlerts {
+			date, err := ptypes.TimestampProto(alert.CreatedAt)
+			if err != nil {
+				return nil, err
+			}
 			result = append(result, &pb_device.Alert{
 				Id:           uint32(alert.ID),
 				DeviceSerial: alert.DeviceSerial,
 				Text:         alert.Text,
 				Humidity:     uint32(alert.Humidity),
+				Date:         date,
 			})
 		}
 	}
@@ -100,11 +106,16 @@ func (f *FarmServer) GetRecentAlerts(ctx context.Context, empty *emptypb.Empty) 
 			return nil, err
 		}
 		for _, alert := range fetchedAlerts {
+			date, err := ptypes.TimestampProto(alert.CreatedAt)
+			if err != nil {
+				return nil, err
+			}
 			result = append(result, &pb_device.Alert{
 				Id:           uint32(alert.ID),
 				DeviceSerial: alert.DeviceSerial,
 				Text:         alert.Text,
 				Humidity:     uint32(alert.Humidity),
+				Date:         date,
 			})
 		}
 	}
