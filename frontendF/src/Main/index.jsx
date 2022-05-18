@@ -8,6 +8,7 @@ import { Report } from "./Report";
 import { Loading } from "./Loading";
 import { CreateDevice } from "./CreateDevice";
 import { DeviceConfig } from "./DeviceConfig";
+import { Alerts } from "./Alerts"
 
 const Main = () => {
     const navigate = useNavigate();
@@ -168,7 +169,8 @@ const Main = () => {
                                         deviceStatus={deviceStatus}
                                     />,
                                     "report": <Report devices={devices}/>,
-                                    "config": <DeviceConfig devices={devices}/>
+                                    "config": <DeviceConfig devices={devices}/>,
+                                    "alerts" : <Alerts />
                                 }[currentPage]
                             }
                         </div>

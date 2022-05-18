@@ -63,6 +63,15 @@ export const Menu = ({ currentPage, setCurrentPage, farm }) => {
       >
         Config
       </h5>
+        <h5
+            className="menuItem"
+            style={{ color: currentPage === "alert" ? "rgb(0, 204, 0)" : "#111" }}
+            onClick={() => {
+                setCurrentPage("alerts");
+            }}
+        >
+            Alerts
+        </h5>
       <h5
         className="menuItem"
         style={{
