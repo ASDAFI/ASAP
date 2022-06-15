@@ -1,6 +1,6 @@
 # ASAP
 
-### IOT based Farm management system.
+Simple IOT based Farm management system using CQRS pattern.
 
 
 ## Build
