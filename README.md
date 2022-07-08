@@ -2,7 +2,6 @@
 
 Simple IOT based Farm management system using CQRS pattern.
 
-
 ## Build
 
 ### Setup Protobuf
