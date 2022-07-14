@@ -1,6 +1,6 @@
 # ASAP
 
-Simple IOT based Farm management system using CQRS pattern.
+Simple IOT based Farm management system using CQRS pattern. (Domain Driven Design)
 
 ## Build
 
