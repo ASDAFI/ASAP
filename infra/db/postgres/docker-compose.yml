@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+    postgres:
+        container_name: postgres
+        image: postgres
+        environment:
+            POSTGRES_USER: asap
+            POSTGRES_HOST: localhost
+            POSTGRES_PASSWORD: asapDB!
+            
+
+        ports:
+            - 5432:5432
+        volumes:
+            - ./data/postgres:/var/lib/postgresql/data
+        restart: always
+       
+
+        
+    
